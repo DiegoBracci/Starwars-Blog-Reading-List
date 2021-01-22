@@ -4,14 +4,12 @@ import ScrollToTop from "./component/scrollToTop";
 import ReactDOM from "react-dom";
 
 import { Home } from "./views/home";
-import { Demo } from "./views/demo";
-import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 
-import { Navbar } from "./component/navbar.js";
 import { Footer } from "./component/footer.js";
-import { GroupCard, Gallery } from "./views/prueba.js";
-import { Card } from "./views/Card.js";
+import { Gallery } from "./views/gallery.js";
+import { createCard } from "./views/createCard.js";
+import { MyFetch } from "./views/pruebaFecth";
 
 //create your first component
 const Layout = () => {
@@ -26,19 +24,10 @@ const Layout = () => {
 					<Switch>
 						<Route exact path="/">
 							<Home />
+							<MyFetch />
 						</Route>
-						<Route exact path="/demo">
-							<Navbar />
-							<div className="container">
-								<Gallery />
-								<Link classNmae="col-12 justify-content-center" to="/">
-									<button className="btn btn-primary">Back home</button>
-								</Link>
-							</div>
-						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
-						</Route>
+						<Route exact path="/gallery" component={Gallery} />
+						<Route exact path="/createCard" component={createCard} />
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

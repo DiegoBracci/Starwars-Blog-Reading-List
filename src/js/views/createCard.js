@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
+import { NavBar } from "../component/navbar";
 
-import "../../styles/demo.scss";
-
-export function createCard(props) {
+export function Card(props) {
 	const [count, setCount] = useState(0);
 	let { title, description, buttonLabel, buttonURL, imgUrl } = props;
 
@@ -34,19 +32,24 @@ export function createCard(props) {
 	);
 }
 
-export function Card() {
+export function createCard() {
 	return (
-		<createCard
-			title="Paul Mccartney"
-			description="James Paul McCartney es un cantautor, compositor, músico, multiinstrumentista, escritor y actor británico"
-			buttonLabel="Find out more!"
-			buttonURL="https://es.wikipedia.org/wiki/Paul_McCartney"
-			imgUrl="https://rock101online.mx/wp-content/uploads/2019/06/Paul-McCartney-840x658.jpg"
-		/>
+		<div>
+			<NavBar />
+			<div className="container-fluid">
+				<Card
+					title="Paul Mccartney"
+					description="James Paul McCartney es un cantautor, compositor, músico, multiinstrumentista, escritor y actor británico"
+					buttonLabel="Find out more!"
+					buttonURL="https://es.wikipedia.org/wiki/Paul_McCartney"
+					imgUrl="https://rock101online.mx/wp-content/uploads/2019/06/Paul-McCartney-840x658.jpg"
+				/>
+			</div>
+		</div>
 	);
 }
 
-createCard.propTypes = {
+Card.propTypes = {
 	title: PropTypes.string,
 	description: PropTypes.string,
 	buttonLabel: PropTypes.string,

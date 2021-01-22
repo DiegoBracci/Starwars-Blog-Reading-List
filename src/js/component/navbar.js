@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Prueba } from "../views/prueba.js";
+import { Prueba } from "../views/gallery.js";
 
-export const Navbar = () => {
+export const NavBar = () => {
 	const [count, setCount] = useState(0);
 	return (
 		<nav className="navbar navbar-light bg-dark mb-3">
