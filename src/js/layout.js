@@ -24,7 +24,6 @@ const Layout = () => {
 					<Switch>
 						<Route exact path="/">
 							<Home />
-							<MyFetch />
 						</Route>
 						<Route exact path="/gallery" component={Gallery} />
 						<Route exact path="/createCard" component={createCard} />

@@ -3,18 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			isLoaded: false,
 			planets: [],
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			planetsProperties: [],
+			favoritesList: []
 		},
 		actions: {
 			getData: () => {
@@ -34,23 +24,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					);
 			},
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
+
+			// getPlanetsProperties: () => {
+			// 	fetch("https://www.swapi.tech/api/planets/1/")
+			// 		.then(res => res.json())
+			// 		.then(
+			// 			result => {
+			// 				setStore({
+			// 					planets: result.results,
+			// 					isLoaded: true
+			// 				});
+			// 			},
+			// 			error => {
+			// 				setIsLoaded(false);
+			// 				setError(error);
+			// 			}
+			// 		);
+			// }
+
+			setFavorite: favorite => {
+				console.log(favorite);
 				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				//reset the global store
-				setStore({ demo: demo });
+				let newStore = [...store.favoritesList, favorite];
+				setStore({ favoritesList: newStore });
 			}
 		}
 	};

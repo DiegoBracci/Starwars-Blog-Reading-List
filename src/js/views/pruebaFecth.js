@@ -6,25 +6,6 @@ import { Context } from "../store/appContext";
 
 export function MyFetch() {
 	const { store, actions } = useContext(Context);
-	const [items, setItems] = useState([]);
-
-	// useEffect(() => {
-	// 	fetch("https://www.swapi.tech/api/planets/")
-	// 		.then(res => res.json())
-	// 		.then(
-	// 			result => {
-	// 				// setItems(result);
-	// 				setStore({
-	// 					planets: result
-	// 				});
-	// 				setIsLoaded(true);
-	// 			},
-	// 			error => {
-	// 				setIsLoaded(false);
-	// 				setError(error);
-	// 			}
-	// 		);
-	// }, []);
 
 	useEffect(() => {
 		actions.getData();
@@ -34,12 +15,9 @@ export function MyFetch() {
 	return (
 		<div>
 			<ul>
-				{/* {store.pl.map(item => (
+				{store.planets.map(item => (
 					<Card key={item.uid} />
-					// <li key={item.uid}>
-					// 	{item.url} : {item.name}
-					// </li>
-				))} */}
+				))}
 			</ul>
 		</div>
 	);
