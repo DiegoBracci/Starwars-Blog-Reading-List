@@ -15,7 +15,8 @@ export function Card(props) {
 		if (isFavorite === false) {
 			actions.setFavorite(title);
 		} else {
-			console.log("delete");
+			isFavorite === false;
+			actions.setFavorite(favorite.filter(title));
 		}
 		setIsFavorite(!isFavorite);
 	}

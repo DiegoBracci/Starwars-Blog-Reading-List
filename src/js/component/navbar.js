@@ -7,6 +7,7 @@ export const NavBar = () => {
 	const { store, actions } = useContext(Context);
 	const [count, setCount] = useState(0);
 	const [displayMenu, setDisplayMenu] = useState("none");
+	const favorites = store.favoritesList.map(item => <li key={item.uid}>{item.title}</li>);
 
 	function dropBar() {
 		if (displayMenu === "none") {
@@ -15,7 +16,6 @@ export const NavBar = () => {
 			setDisplayMenu("none");
 		}
 	}
-	// const menuList = store.favoritesList.map(item => <li key={item.uid} title={item.name} />);
 	return (
 		<nav className="navbar navbar-light bg-dark mb-3">
 			<Link to="/">
@@ -33,23 +33,17 @@ export const NavBar = () => {
 						data-toggle="dropdown"
 						onClick={() => {
 							dropBar();
-						}}>
-						<span className="caret" />
-						<span className="sr-only">Desplegar menú</span>
-					</button>
-					<ul
-						className="dropdown-menu"
-						role="menu"
-						style={{ display: displayMenu }}
-						onChange={() => {
-							store.favoritesList.map(<li key={item.uid}>{item}</li>);
-						}}>
-						<li>
-							<label href="#">{store.favoritesList}</label>
-						</li>
-						<li>
-							<a href="#">Acción #1</a>
-						</li>
+						}}
+					/>
+					<ul className="dropdown-menu" role="menu" style={{ display: displayMenu }}>
+						{store.favoritesList.map((item, index) => (
+							<li key={index}>
+								<h5>
+									&nbsp; {item} &nbsp;
+									<i className="fas fa-trash" />
+								</h5>
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>
