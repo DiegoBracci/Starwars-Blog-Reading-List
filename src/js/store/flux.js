@@ -12,7 +12,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(res => res.json())
 					.then(
 						result => {
-							// setItems(result);
 							setStore({
 								planets: result.results,
 								isLoaded: true
@@ -43,14 +42,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// }
 
 			setFavorite: favorite => {
-				console.log(favorite);
 				const store = getStore();
 
 				let newStore = [...store.favoritesList, favorite];
 				setStore({ favoritesList: newStore });
+				console.log(newStore);
+			},
+
+			setRemoveFavorite: favorite => {
+				const store = getStore();
+				const newStore = store.favoritesList.filter(task => task !== favorite);
+				setStore({ favoritesList: newStore });
+				console.log(newStore);
 			}
 		}
 	};
 };
-
 export default getState;

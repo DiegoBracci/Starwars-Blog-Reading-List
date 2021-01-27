@@ -8,8 +8,8 @@ import injectContext from "./store/appContext";
 
 import { Footer } from "./component/footer.js";
 import { Gallery } from "./views/gallery.js";
-import { createCard } from "./views/createCard.js";
 import { MyFetch } from "./views/pruebaFecth";
+import { FullCard } from "./views/fullCard";
 
 //create your first component
 const Layout = () => {
@@ -26,7 +26,7 @@ const Layout = () => {
 							<Home />
 						</Route>
 						<Route exact path="/gallery" component={Gallery} />
-						<Route exact path="/createCard" component={createCard} />
+						<Route exact path="/fullCard" component={FullCard} />
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

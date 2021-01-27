@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import { Card } from "./createCard";
+import { Card } from "./card";
 import { Context } from "../store/appContext";
 
 export function MyFetch() {

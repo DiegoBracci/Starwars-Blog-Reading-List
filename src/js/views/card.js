@@ -9,17 +9,18 @@ import { Link } from "react-router-dom";
 export function Card(props) {
 	const { store, actions } = useContext(Context);
 	const [isFavorite, setIsFavorite] = useState(false);
-	let { title, description, buttonLabel, buttonURL, imgUrl } = props;
+	let { title, description, buttonLabel } = props;
 
-	function saveFavorite() {
+	const saveFavorite = value => {
 		if (isFavorite === false) {
 			actions.setFavorite(title);
-		} else {
-			isFavorite === false;
-			actions.setFavorite(favorite.filter(title));
+			setIsFavorite(!isFavorite);
+		} else if (isFavorite === true) {
+			console.log(true);
+			actions.setRemoveFavorite(title);
+			setIsFavorite(isFavorite === false);
 		}
-		setIsFavorite(!isFavorite);
-	}
+	};
 
 	return (
 		<div className="card">
@@ -31,15 +32,15 @@ export function Card(props) {
 			<div className="card-body">
 				<h5 className="card-title">{title}</h5>
 				<p className="card-text">{description}</p>
-				<Link to="/createCard">
-					<label href={buttonURL} className="btn btn-primary">
+				<Link to="/fullCard">
+					<label href="#" className="btn btn-primary">
 						{buttonLabel}
 					</label>
 				</Link>
 				<label>
 					<i
 						className="fa fa-heart text-dark col-6 justify-content-center"
-						onClick={() => {
+						onClick={value => {
 							saveFavorite();
 						}}
 					/>

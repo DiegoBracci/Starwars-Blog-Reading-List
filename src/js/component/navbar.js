@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Prueba } from "../views/gallery.js";
 import { Context } from "../store/appContext";
+import PropTypes from "prop-types";
 
 export const NavBar = () => {
 	const { store, actions } = useContext(Context);
 	const [count, setCount] = useState(0);
 	const [displayMenu, setDisplayMenu] = useState("none");
-	const favorites = store.favoritesList.map(item => <li key={item.uid}>{item.title}</li>);
 
 	function dropBar() {
 		if (displayMenu === "none") {
@@ -16,6 +16,9 @@ export const NavBar = () => {
 			setDisplayMenu("none");
 		}
 	}
+	// const deleteFavorite = value => {
+	// 	actions.setRemoveFavorite(value);
+	// };
 	return (
 		<nav className="navbar navbar-light bg-dark mb-3">
 			<Link to="/">
@@ -40,7 +43,12 @@ export const NavBar = () => {
 							<li key={index}>
 								<h5>
 									&nbsp; {item} &nbsp;
-									<i className="fas fa-trash" />
+									<i
+										className="fas fa-trash"
+										onClick={value => {
+											deleteFavorite(item);
+										}}
+									/>
 								</h5>
 							</li>
 						))}
