@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import { Prueba } from "../views/gallery.js";
-import { Context } from "../store/appContext";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
-export const NavBar = () => {
+import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
+
+export const NavBar = props => {
 	const { store, actions } = useContext(Context);
-	const [count, setCount] = useState(0);
+	const [isFavorite, setIsFavorite] = useState(false);
 	const [displayMenu, setDisplayMenu] = useState("none");
+	let { title, description, buttonLabel } = props;
+
+	//Button desplegable
 
 	function dropBar() {
 		if (displayMenu === "none") {
@@ -16,9 +20,7 @@ export const NavBar = () => {
 			setDisplayMenu("none");
 		}
 	}
-	// const deleteFavorite = value => {
-	// 	actions.setRemoveFavorite(value);
-	// };
+
 	return (
 		<nav className="navbar navbar-light bg-dark mb-3">
 			<Link to="/">
@@ -41,15 +43,15 @@ export const NavBar = () => {
 					<ul className="dropdown-menu" role="menu" style={{ display: displayMenu }}>
 						{store.favoritesList.map((item, index) => (
 							<li key={index}>
-								<h5>
+								<h6>
 									&nbsp; {item} &nbsp;
 									<i
-										className="fas fa-trash"
-										onClick={value => {
-											deleteFavorite(item);
+										onClick={() => {
+											actions.setRemoveFavorite(item);
 										}}
+										className="fas fa-trash"
 									/>
-								</h5>
+								</h6>
 							</li>
 						))}
 					</ul>
@@ -57,4 +59,12 @@ export const NavBar = () => {
 			</div>
 		</nav>
 	);
+};
+
+NavBar.propTypes = {
+	title: PropTypes.string,
+	description: PropTypes.string,
+	buttonLabel: PropTypes.string,
+	buttonURL: PropTypes.string,
+	imgUrl: PropTypes.string
 };

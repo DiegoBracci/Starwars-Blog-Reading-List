@@ -3,17 +3,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			isLoaded: false,
 			planets: [],
-			planetsProperties: [],
-			favoritesList: []
+			people: [],
+			favoritesList: [],
+			heartColor: [
+				{
+					color: "black",
+					paddingLeft: "60px",
+					paddingTop: "5px"
+				}
+			]
 		},
 		actions: {
-			getData: () => {
+			getDataPlanets: () => {
 				fetch("https://www.swapi.tech/api/planets/")
 					.then(res => res.json())
 					.then(
 						result => {
 							setStore({
 								planets: result.results,
+								isLoaded: true
+							});
+						},
+						error => {
+							setIsLoaded(false);
+							setError(error);
+						}
+					);
+			},
+			getDataPeople: () => {
+				fetch("https://www.swapi.tech/api/people/")
+					.then(res => res.json())
+					.then(
+						result => {
+							setStore({
+								people: result.results,
 								isLoaded: true
 							});
 						},
@@ -50,10 +73,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			setRemoveFavorite: favorite => {
+				console.log(favorite);
 				const store = getStore();
 				const newStore = store.favoritesList.filter(task => task !== favorite);
 				setStore({ favoritesList: newStore });
 				console.log(newStore);
+			},
+
+			setChangeHeartColor: color => {
+				const store = getStore();
+				if (store.heartColor.color === "black") {
+					setStore((heartColor.color = "red"));
+				} else if (store.heartColor.color === "red") {
+					setStore((heartColor.color = "black"));
+				}
 			}
 		}
 	};

@@ -6,22 +6,35 @@ import { Context } from "../store/appContext";
 import { NavBar } from "../component/navbar";
 import { Link } from "react-router-dom";
 
+const black = { color: "black", paddingLeft: "60px", paddingTop: "5px" };
+
 export function Card(props) {
 	const { store, actions } = useContext(Context);
 	const [isFavorite, setIsFavorite] = useState(false);
+	const [heartColor, setHeartColor] = useState(black);
 	let { title, description, buttonLabel } = props;
 
-	const saveFavorite = value => {
+	//Favorites List
+
+	const saveFavorite = () => {
 		if (isFavorite === false) {
 			actions.setFavorite(title);
 			setIsFavorite(!isFavorite);
 		} else if (isFavorite === true) {
-			console.log(true);
+			// console.log(true);
 			actions.setRemoveFavorite(title);
-			setIsFavorite(isFavorite === false);
+			setIsFavorite(!isFavorite);
 		}
 	};
+	// Cambio de color del corazon de negro a rojo
 
+	const ChangeHeartColor = e => {
+		if (heartColor.color === "black") {
+			setHeartColor({ color: "red", paddingLeft: "60px", paddingTop: "5px" });
+		} else if (heartColor.color === "red") {
+			setHeartColor(black);
+		}
+	};
 	return (
 		<div className="card">
 			<img
@@ -39,9 +52,10 @@ export function Card(props) {
 				</Link>
 				<label>
 					<i
-						className="fa fa-heart text-dark col-6 justify-content-center"
-						onClick={value => {
-							saveFavorite();
+						className="fa fa-heart col-6 justify-content-center"
+						style={heartColor}
+						onClick={() => {
+							saveFavorite(), ChangeHeartColor();
 						}}
 					/>
 				</label>
